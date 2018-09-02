@@ -1,0 +1,16 @@
+flask
+flask_login
+flask_script
+flask_restful
+flask_sqlalchemy
+flask_redis
+click
+gevent
+gunicorn
+pymysql
+xlwt
+pycryptodome
+rsa
+redis
+celery
+git+https://github.com/cangmean/fet.git
