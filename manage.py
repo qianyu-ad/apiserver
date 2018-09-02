@@ -35,7 +35,7 @@ def runserver():
     os.system('gunicorn -c unicorn.py manage:app')
 
 manager.add_command('run', Server(
-    host='0.0.0.0',
+    host='127.0.0.1',
     port=5000,
     use_reloader=True,
     use_debugger=True
