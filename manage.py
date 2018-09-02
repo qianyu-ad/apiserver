@@ -1,6 +1,7 @@
 """
 管理
 """
+import os
 from flask_script import Server, Manager
 from apiserver.app import create_app
 from apiserver.models import db, User, Article, Category
