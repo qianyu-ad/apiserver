@@ -1,11 +1,13 @@
-from flask import Blueprint, abort, render_template, current_app
+from flask import Blueprint, abort, render_template, current_app, request
 from apiserver.models import Article
 
 bp = Blueprint('home', __name__)
 
 @bp.route('/')
 def index():
-    return render_template('index.html')
+    _id = request.args.get('id')
+    article = Article.get_first(id=_id)
+    return render_template('article.html', article=article)
 
 
 @bp.route('/articles/<id>')

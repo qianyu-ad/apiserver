@@ -19,7 +19,7 @@ DB_CONFIG = dict(
     host='127.0.0.1',
     db='apiserver',
     username='root',
-    password='123456',
+    password='654321',
 )
 
 # 日志

@@ -1,0 +1,155 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+html,body{
+    height: 100%;
+}
+body{
+    font-family: "SF Pro Display",Roboto,Noto,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    /*background: #f5f6f7;*/
+}
+ul,li{
+    list-style: none;
+}
+.pull-left{
+    float: left;
+}
+.pull-right{
+    float: right;
+}
+.clearfix{
+    zoom: 1;
+}
+.clearfix:after{
+    clear: both;
+    display: block;
+    content:'';
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+}
+.w-cw{
+    width:1000px;
+    margin:0 auto;
+}
+.bgf{
+    background-color: #fff;
+}
+
+/*header*/
+.w-header{
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.05);
+    padding-bottom: 10px;
+}
+.h-nav{
+    overflow:hidden;
+}
+.h-nav > li{
+    float:left;
+}
+.h-nav > li a{
+    display: block;
+    margin-right: 15px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #3D3D3D;
+    text-decoration: none;
+}
+.h-nav > li a:hover{
+    color:#CA0C16;
+}
+
+.h-ad{
+    height: 91px;
+    background-color: #e0e0e0;
+}
+
+/*内容*/
+.w-body{
+    margin-top: 20px;
+}
+.bd-cont{
+    margin-top: 40px;
+}
+.bd-l{
+    width:640px;
+    float: left;
+}
+
+.bd-r{
+    width: 310px;
+    float:right;
+}
+
+.bd-title{
+    font: bold 24px "宋体";
+    padding: 0 0 20px 0;
+    letter-spacing: -1.5px;
+}
+.trw-l{
+    float:left;
+    width:250px;
+}
+.trw-l p{
+    color: #999;
+    line-height: 18px;
+    margin:0;
+    font-size: 12px;
+}
+.trw-r{
+    width:250px;
+    float: right;
+}
+
+.bd-article{
+    margin-top: 10px;
+    border-top:1px solid #e0e0e0;
+    padding-top: 25px;
+}
+
+.ft-cont{
+    margin-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    padding:20px 0 10px;
+}
+
+.f-nav{
+    text-align: center;
+}
+.f-nav > li{
+    display: inline-block;
+    margin:0 10px;
+}
+
+.f-nav > li a{
+    font-size:12px;
+    text-decoration: none;
+    color:#333;
+}
+.f-tip{
+    color:#999;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.bd-r-ad{
+    background: #e0e0e0;
+    height: 200px;
+    margin-top: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+

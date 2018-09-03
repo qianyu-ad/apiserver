@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="keywords" content="">
     <meta name="description" content="">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <title>首页</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/calendar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -28,10 +29,10 @@
     <div class="w-body">
         <div class="bgf w-cw bd-cont clearfix">
             <div class="bd-l">
-                <h1 class="bd-title">鲜鱼易变质怎么办？科威特商店给鱼戴“美瞳”</h1>
+                <h1 class="bd-title">{{ article.title }}</h1>
                 <div class="trw clearfix">
                     <div class="trw-l">
-                        <p>2018年09月03日 16:05:52</p>
+                        <p>{{ article.create_time }}</p>
                         <p>来源：网络</p>
                     </div>
                     <div class="trw-r">
@@ -40,12 +41,12 @@
                 </div>
 
                 <div class="bd-article">
-                    内容区域
+                    {{ article.content | safe }}
                 </div>
             </div>
             <div class="bd-r">
                 <div class="calendar" id="calendar"></div>
-                <div class="bd-r-ad"></div>
+                <div class="bd-r-ad">广告区域</div>
             </div>
         </div>
     </div>
@@ -65,10 +66,6 @@
     </footer>
     <script src="{{ url_for('static', filename = 'js/jquery.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/calendar.js') }}"></script>
-    <script>
-        
-    
-
-    </script>
+    <script></script>
 </body>
 </html>

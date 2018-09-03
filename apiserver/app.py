@@ -18,6 +18,7 @@ def create_app(default='default'):
     """ 创建应用"""
     app = Flask(
         __name__,
+        static_url_path='/static',
     )
 
     configure_app(app, config_file=default)
