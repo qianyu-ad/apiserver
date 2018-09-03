@@ -14,7 +14,7 @@ import datetime
 import xlwt
 from functools import wraps
 from inspect import signature
-from apiserver.config import DOWN_DIR
+from apiserver.config.default import DOWN_DIR
 
 # pylint: disable=all
 

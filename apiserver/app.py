@@ -14,13 +14,13 @@ celery = Celery(
 )
 
 
-def create_app():
+def create_app(default='default'):
     """ 创建应用"""
     app = Flask(
         __name__,
     )
 
-    configure_app(app)
+    configure_app(app, config_file=default)
     configure_celery_app(app)
     configure_request_hook(app)
     configure_extensions(app)
@@ -28,10 +28,18 @@ def create_app():
     return app
 
 
-def configure_app(app):
+def configure_app(app, config_dir="apiserver.config", config_file=None):
     """ 基础配置"""
-    from apiserver import config as config_file
-    app.config.from_object(config_file)
+    config_files = ['default']
+    if config_file and config_file not in config_files:
+        config_files.append(config_file)
+    
+    for config_file in config_files:
+        config_path = config_dir + '.' + config_file
+        if config_path.endswith('.py'):
+            app.config.from_pyfile(config_path)
+        else:
+            app.config.from_object(config_path)
 
 
 def configure_celery_app(app):
