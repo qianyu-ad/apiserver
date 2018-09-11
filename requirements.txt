@@ -4,6 +4,7 @@ flask_script
 flask_restful
 flask_sqlalchemy
 flask_redis
+flask_migrate
 click
 gevent
 gunicorn

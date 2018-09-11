@@ -7,6 +7,7 @@ api 路由加载， 需要加载模块到当前文件, 例如:
 """
 from apiserver.api import auth
 from apiserver.api import article
+from apiserver.api import site
 
 
 from apiserver.api.base import register_restful_api

@@ -75,12 +75,14 @@ class Category(db.Model, CRUDMixin):
     }
 
     id = db.Column(db.String(16), default=make_uuid, primary_key=True)
+    site_code = db.Column(db.String(20), nullable=False)
     name = db.Column(db.String(255), nullable=False, unique=True)
 
     def to_json(self):
         return {
             'id': self.id,
             'name': self.name,
+            'siteCode': self.site_code,
         }
 
 
@@ -96,7 +98,8 @@ class Article(db.Model, CRUDMixin):
 
     id = db.Column(db.String(16), default=make_uuid, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
-    category = db.Column(db.String(16), nullable=False)
+    category_id = db.Column(db.String(16), nullable=False)
+    seo_id = db.Column(db.String(16))
     content = db.Column(db.Text, nullable=False)
     status = db.Column(db.Integer, default=1)
     create_time = db.Column(db.DateTime, default=datetime.now)
@@ -108,15 +111,67 @@ class Article(db.Model, CRUDMixin):
             'id': self.id,
             'title': self.title,
             'status': self.status,
-            'category': self.category,
+            'categoryId': self.category_id,
+            'seoId': self.seo_id,
         }
-        category = Category.get_first(id=self.category)
-        resp['categoryName'] = category.name
         if has_content:
             resp['content'] = self.content
-
         return resp
 
+
+class Site(db.Model, CRUDMixin):
+
+    __table_args__ = {
+        'mysql_engine': 'InnoDB',
+        'mysql_charset': 'utf8',
+    }
+    """
+    :field name: 网站名称
+    :field desc: 网站描述
+    :field code: 网站子域名
+    """
+
+    id = db.Column(db.String(16), default=make_uuid, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    code = db.Column(db.String(20), nullable=False, unique=True)
+    desc = db.Column(db.String(255))
+    create_time = db.Column(db.DateTime, default=datetime.now)
+    update_time = db.Column(db.DateTime, default=datetime.now)
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'desc': self.desc,
+            'code': self.code,
+        }
+
+
+class Seo(db.Model, CRUDMixin):
+
+    __table_args__ = {
+        'mysql_engine': 'InnoDB',
+        'mysql_charset': 'utf8',
+    }
+    id = db.Column(db.String(16), default=make_uuid, primary_key=True)
+    name = db.Column(db.String(100), nullable=False, unique=True)
+    keywords = db.Column(db.Text)
+    desc = db.Column(db.String(255))
+    description = db.Column(db.Text)
+
+    def to_json(self, is_show=False):
+        resp = {
+            'id': self.id,
+            'name': self.name,
+            'desc': self.desc,
+        }
+        if is_show:
+            resp['keywords'] = self.keywords[:60]
+            resp['description'] = self.description[:60]
+        else:
+            resp['keywords'] = self.keywords
+            resp['description'] = self.description
+        return resp
 
 def authenticate(username, password):
     """ 验证"""

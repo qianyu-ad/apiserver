@@ -18,6 +18,13 @@ class CateroyApi(RestApi):
         parser.add_argument(
             'name', location='json', required=True, help="name 不能为空",
         )
+        parser.add_argument(
+            'siteCode',
+            location='json',
+            required=True,
+            help="siteCode 不能为空",
+            dest="site_code",
+        )
         args = parser.parse_args()
         args = {k: v for k, v in args.items() if v}
         return args
@@ -31,14 +38,14 @@ class CateroyApi(RestApi):
     def post(self):
         form_data = self.parse_form()
         if 'id' in form_data:
-            category = Category.get_first(id=form_data['id'])
+            category = Category.get_first(id=form_data.pop('id'))
             if category:
-                category.update(name=form_data['name'])
+                category.update(**form_data)
                 return self.ok(msg="更新成功")
             else:
                 return self.no(msg="没有找到该分类")
         else:
-            category = Category.create(name=form_data['name'])
+            category = Category.create(**form_data)
             if category:
                 return self.ok(msg="创建成功")
             else:
@@ -74,7 +81,12 @@ class ArticleListApi(RestApi):
             'content', required=True, help="内容不能为空", location="json",
         )
         parser.add_argument(
-            'category', required=True, help="分类不能为空", location="json",
+            'categoryId', required=True,
+            help="分类不能为空", location="json",
+            dest="category_id"
+        )
+        parser.add_argument(
+            'seoId', location='json', dest='seo_id'
         )
         parser.add_argument(
             'id', location="json",
@@ -87,7 +99,7 @@ class ArticleListApi(RestApi):
         parser = reqparse.RequestParser()
         parser.add_argument('page', default=1, type=int)
         parser.add_argument('size', default=10, type=int)
-        parser.add_argument('category')
+        parser.add_argument('categoryId', dest='category_id')
         parser.add_argument('status')
         parser.add_argument('id')
         args = parser.parse_args()
@@ -129,6 +141,20 @@ class ArticleListApi(RestApi):
                 return self.ok(msg="创建成功")
             else:
                 return self.no(msg="创建失败")
+    
+    @login_required
+    def delete(self):
+        data = request.get_json() or {}
+        _id = data.get('id')
+        if not _id:
+            return self.no(msg="id 不能为空")
+
+        article = Article.get_first(id=_id)
+        if article:
+            article.delete(True)
+            return self.ok(msg="删除成功")
+        else:
+            return self.no(msg="没有找到该文章") 
 
 
 @router('/api/articles/update/status')

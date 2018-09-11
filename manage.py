@@ -4,25 +4,21 @@
 import os
 from flask_script import Server, Manager
 from apiserver.app import create_app
-from apiserver.models import db, User, Article, Category
+from apiserver.models import db, User, Article, Category, Site, Seo
+from flask_migrate import Migrate, MigrateCommand
 
 # pylint: disable=all
 
 app = create_app()
 manager = Manager(app)
-
+migrate = Migrate(app, db)
+manager.add_command('db', MigrateCommand)
 
 @manager.command
-def init():
-    drop()
-    db.create_all()
+def init_admin():
     # 初始化角色
     user = User.create('admin', 'admin123')
-    cate = Category.create(name="通用")
-    article = Article.create(title='你好', content="好好吃啊", category=cate.id)
     db.session.add(user)
-    db.session.add(article)
-    db.session.add(cate)
     db.session.commit()
 
 
@@ -36,7 +32,7 @@ def runserver():
     os.system('gunicorn -c unicorn.py manage:app')
 
 manager.add_command('run', Server(
-    host='127.0.0.1',
+    host='0.0.0.0',
     port=5000,
     use_reloader=True,
     use_debugger=True
