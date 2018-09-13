@@ -10,6 +10,7 @@ from apiserver.extends import db, login_manager
 from apiserver.utils import cryptor
 from apiserver.utils import get_code
 from apiserver.mixins.crud import CRUDMixin
+from sqlalchemy.databases import mysql
 
 # pylint: disable=all
 
@@ -100,7 +101,7 @@ class Article(db.Model, CRUDMixin):
     title = db.Column(db.String(255), nullable=False)
     category_id = db.Column(db.String(16), nullable=False)
     seo_id = db.Column(db.String(16))
-    content = db.Column(db.Text, nullable=False)
+    content = db.Column(mysql.MEDIUMTEXT, nullable=False)
     status = db.Column(db.Integer, default=1)
     create_time = db.Column(db.DateTime, default=datetime.now)
     update_time = db.Column(db.DateTime, default=datetime.now)
