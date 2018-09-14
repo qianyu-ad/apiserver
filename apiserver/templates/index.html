@@ -1,3 +1,5 @@
+{% from "func.html" import pagination_widget %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,68 +9,120 @@
     <title>首页</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/calendar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
     <header class="w-header">
         <div class="w-cw">
             <ul class="h-nav">
-                <li><a href="" title="首页">首页</a></li>
-                <li><a href="" title="前端">前端</a></li>
-                <li><a href="" title="运维">运维</a></li>
-                <li><a href="" title="数据库">数据库</a></li>
-                <li><a href="" title="设计">设计</a></li>
-                <li><a href="" title="缓存">缓存</a></li>
-                <li><a href="" title="工具">工具</a></li>
+                <!-- http://a.com:8001/index.html?type="tec"  通过type来查询导航-->
+                <li><a href="/" title="首页">首页</a></li>
+                {% for ca in categories %}
+                <li><a href="/category/{{ ca.code }}" title="{{ ca.name }}">{{ ca.name }}</a></li>
+                {% endfor %}
             </ul>
+            <!-- 广告区域 -->
             <div class="h-ad">
-                广告区域
+                <div class="ad-728">
+                    <!-- 728*90 -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-3485826681669375"
+                         data-ad-slot="5487436419"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                <div class="ad-272">
+                    <!-- 272*90 -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:272px;height:90px"
+                         data-ad-client="ca-pub-3485826681669375"
+                         data-ad-slot="5393558331"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
             </div>
         </div>
     </header>
     <div class="w-body">
-        <div class="bgf w-cw bd-cont clearfix">
-            <div class="bd-l">
-                <h1 class="bd-title">鲜鱼易变质怎么办？科威特商店给鱼戴“美瞳”</h1>
-                <div class="trw clearfix">
-                    <div class="trw-l">
-                        <p>2018年09月03日 16:05:52</p>
-                        <p>来源：网络</p>
+            <div class="bgf w-cw bd-cont clearfix">
+                <div class="bd-l">
+                    <ul>
+                        {% for article in articles %}
+                        <li class="list-item">
+                            <div class="list-title ellipsis">
+                                <a href="/article/{{ article.id }}">{{ article.title }}</a>
+                            </div>
+                            <div class="list-cont ellipsis">
+                                {{ article.content[:150] | safe | filter_tag }}
+                            </div>
+                            <div class="list-info">
+                                <span class="list-date">{{ article.create_time }}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <!-- nav -->
+                    {%if pagination%}
+                        {{ pagination_widget(pagination, '.index') }}
+                    {% endif %}
+                </div>
+                <div class="bd-r">
+                    <div class="calendar" id="calendar"></div>
+                    <div class="bd-r-ad">
+                        <!-- 310*90 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:310px;height:90px"
+                             data-ad-client="ca-pub-3485826681669375"
+                             data-ad-slot="6909141362"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
-                    <div class="trw-r">
-                        <div class="bshare-custom icon-medium-plus"><div class="bsPromo bsPromo2"></div><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+                    <!-- 推荐文章 -->
+                    <div class="w-tj">
+                        <h3 class="tj-title">今日推荐</h3>
+                        <ul class="tj-list">
+                            {% for t in top_articles %}
+                            <li class="tj-item"><a href="/article/{{ t.id }}">{{ t.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="bd-r-ad">
+                        <!-- 310*90 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:310px;height:90px"
+                             data-ad-client="ca-pub-3485826681669375"
+                             data-ad-slot="6909141362"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    <div class="bd-r-ad">
+                        <!-- 310*90 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:310px;height:90px"
+                             data-ad-client="ca-pub-3485826681669375"
+                             data-ad-slot="6909141362"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
                 </div>
-
-                <div class="bd-article">
-                    内容区域
-                </div>
-            </div>
-            <div class="bd-r">
-                <div class="calendar" id="calendar"></div>
-                <div class="bd-r-ad"></div>
             </div>
         </div>
-    </div>
     <footer class="w-footer">
         <div class="w-cw ft-cont">
             <ul class="f-nav">
-                <li><a href="">最新消息</a></li>
-                <li><a href="">最新消息</a></li>
-                <li><a href="">最新消息</a></li>
-                <li><a href="">最新消息</a></li>
-                <li><a href="">最新消息</a></li>
-                <li><a href="">最新消息</a></li>
-                <li><a href="">最新消息</a></li>
+                {% for ca in categories %}
+                <li><a href="/category/{{ ca.code }}" title="{{ ca.name }}">{{ ca.name }}</a></li>
+                {% endfor %}
             </ul>
-            <div class="f-tip">内容来自于网络</div>
         </div>
     </footer>
-    <script src="{{ url_for('static', filename = 'js/jquery.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/calendar.js') }}"></script>
-    <script>
-        
-    
-
-    </script>
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
 </body>
 </html>

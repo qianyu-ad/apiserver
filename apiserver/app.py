@@ -22,6 +22,7 @@ def create_app(default='default'):
     )
 
     configure_app(app, config_file=default)
+    configure_filters(app)
     configure_celery_app(app)
     configure_request_hook(app)
     configure_extensions(app)
@@ -41,6 +42,13 @@ def configure_app(app, config_dir="apiserver.config", config_file=None):
 
         config_path = config_dir + '.' + config_file
         app.config.from_object(config_path)
+
+
+def configure_filters(app):
+    """ 配置过滤器"""
+    from apiserver.utils.filters import filter_funcs
+    for k, v in filter_funcs.items():
+        app.jinja_env.filters[k] = v
 
 
 def configure_celery_app(app):

@@ -77,12 +77,14 @@ class Category(db.Model, CRUDMixin):
 
     id = db.Column(db.String(16), default=make_uuid, primary_key=True)
     site_code = db.Column(db.String(20), nullable=False)
-    name = db.Column(db.String(255), nullable=False, unique=True)
+    code = db.Column(db.String(20), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
 
     def to_json(self):
         return {
             'id': self.id,
             'name': self.name,
+            'code': self.code,
             'siteCode': self.site_code,
         }
 
@@ -102,6 +104,7 @@ class Article(db.Model, CRUDMixin):
     category_id = db.Column(db.String(16), nullable=False)
     seo_id = db.Column(db.String(16))
     content = db.Column(mysql.MEDIUMTEXT, nullable=False)
+    count = db.Column(db.Integer, default=0)
     status = db.Column(db.Integer, default=1)
     create_time = db.Column(db.DateTime, default=datetime.now)
     update_time = db.Column(db.DateTime, default=datetime.now)
@@ -114,6 +117,7 @@ class Article(db.Model, CRUDMixin):
             'status': self.status,
             'categoryId': self.category_id,
             'seoId': self.seo_id,
+            'count': self.count,
         }
         if has_content:
             resp['content'] = self.content
