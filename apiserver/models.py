@@ -161,7 +161,7 @@ class Seo(db.Model, CRUDMixin):
     id = db.Column(db.String(16), default=make_uuid, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
     keywords = db.Column(db.Text)
-    desc = db.Column(db.String(255))
+    desc = db.Column(db.Text)
     description = db.Column(db.Text)
 
     def to_json(self, is_show=False):

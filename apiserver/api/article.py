@@ -122,7 +122,9 @@ class ArticleListApi(RestApi):
             size = querys.pop('size')
             articles = Article.get(**querys)
             total = articles.count()
-            articles = articles.offset((page-1) * size).limit(size).all()
+            articles = articles.order_by(
+                Article.create_time.desc()
+            ).offset((page-1) * size).limit(size).all()
             return self.ok(data={
                 "total": total,
                 "list": [article.to_json() for article in articles]
