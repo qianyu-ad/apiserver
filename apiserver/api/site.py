@@ -96,13 +96,13 @@ class SeoApi(RestApi):
         if _id:
             seo = Seo.get_first(id=_id)
             if seo:
-                return self.ok(data=seo.to_json(True))
+                return self.ok(data=seo.to_json())
             else:
                 return self.no(msg="没有找到该seo")
         else:
             seo_list = Seo.query.all()
             return self.ok(data={
-                'list': [s.to_json(True) for s in seo_list]
+                'list': [s.to_json() for s in seo_list]
             })
 
     def post(self):
