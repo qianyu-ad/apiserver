@@ -96,7 +96,7 @@ class SeoApi(RestApi):
         if _id:
             seo = Seo.get_first(id=_id)
             if seo:
-                return self.ok(data=seo.to_json())
+                return self.ok(data=seo.to_json(True))
             else:
                 return self.no(msg="没有找到该seo")
         else:
