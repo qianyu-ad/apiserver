@@ -59,7 +59,7 @@
                             {{ article.content[:150] | safe | filter_tag }}
                         </div>
                         <div class="list-info">
-                            <span class="list-date">{{ article.create_time | filter_rd_date }}</span>
+                            <span class="list-date">{{ article.display_time }}</span>
                         </div>
                     </li>
                     {% endfor %}

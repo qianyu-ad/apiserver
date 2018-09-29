@@ -8,7 +8,7 @@ from flask import jsonify
 from flask_login import UserMixin
 from apiserver.extends import db, login_manager
 from apiserver.utils import cryptor
-from apiserver.utils import get_code
+from apiserver.utils import get_code, random_date
 from apiserver.mixins.crud import CRUDMixin
 from sqlalchemy.databases import mysql
 
@@ -106,6 +106,7 @@ class Article(db.Model, CRUDMixin):
     content = db.Column(mysql.MEDIUMTEXT, nullable=False)
     count = db.Column(db.Integer, default=0)
     status = db.Column(db.Integer, default=1)
+    display_time = db.Column(db.String(30), default=random_date)
     create_time = db.Column(db.DateTime, default=datetime.now)
     update_time = db.Column(db.DateTime, default=datetime.now)
 
@@ -118,6 +119,7 @@ class Article(db.Model, CRUDMixin):
             'categoryId': self.category_id,
             'seoId': self.seo_id,
             'count': self.count,
+            'displayTime': self.display_time,
         }
         if has_content:
             resp['content'] = self.content

@@ -28,20 +28,6 @@ def filter_tag(content):
     content = re.sub(html_tag, '', content)
     return content
 
-
-def filter_rd_date(dt):
-    global dt_cache
-    if dt not in dt_cache:
-        rd_dt = random_date()
-        if len(dt_cache) > 100:
-            dt_cache = {}
-        dt_cache[dt] = rd_dt
-        return rd_dt
-    else:
-        return dt_cache[dt]
-
-
 filter_funcs = {
     'filter_tag': filter_tag,
-    'filter_rd_date': filter_rd_date,
 }

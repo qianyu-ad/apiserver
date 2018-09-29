@@ -146,5 +146,19 @@ def url_route(url):
     route = re.sub(r'(http.*?\.com/)', '', url)
     return route
 
+
+def random_date():
+    now = datetime.datetime.now()
+    min_st = (2013,1,1,0,0,0,0,0,0)
+    max_et = (now.year, now.month, now.day, 23,59,59,0,0,0)
+
+    start_time = time.mktime(min_st)
+    end_time = time.mktime(max_et)
+
+    r = random.randint(start_time, end_time)
+    date = time.localtime(r)
+    date_str = time.strftime('%Y-%m-%d %H:%M:%S', date)
+    return date_str
+
 if __name__ == '__main__':
     print(camel_to_line('hello'))
