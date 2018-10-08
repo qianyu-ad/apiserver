@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.join(os.path.dirname(os.getcwd()))
+sys.path.append(os.getcwd())
 from apiserver.utils import random_date
 from apiserver.models import db, Article
 from manage import app
