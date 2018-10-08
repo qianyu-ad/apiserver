@@ -5,6 +5,7 @@ import os
 from flask_script import Server, Manager
 from apiserver.app import create_app
 from apiserver.models import db, User, Article, Category, Site, Seo
+from apiserver.utils import random_date
 from flask_migrate import Migrate, MigrateCommand
 
 # pylint: disable=all
@@ -30,6 +31,15 @@ def drop():
 @manager.command
 def runserver():
     os.system('gunicorn -c unicorn.py manage:app')
+
+
+@manager.command
+def random_date():
+    articles = Article.query.all()
+    for article in articles:
+        article.display_time = random_date()
+    
+    db.session.commit()
 
 manager.add_command('run', Server(
     host='0.0.0.0',

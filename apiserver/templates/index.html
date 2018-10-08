@@ -50,7 +50,7 @@
         <div class="bgf w-cw bd-cont clearfix">
             <div class="bd-l">
                 <ul>
-                    {% for article in articles %}
+                    {% for article in pagination.items %}
                     <li class="list-item">
                         <div class="list-title ellipsis">
                             <a href="/article/{{ article.id }}">{{ article.title }}</a>

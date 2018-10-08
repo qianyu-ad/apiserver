@@ -40,7 +40,7 @@ def index(category_code=None):
             ).order_by(
                 Article.create_time.desc()
             )
-            pagination = articles.paginate(page, per_page=1, error_out=False)
+            pagination = articles.paginate(page, per_page=10, error_out=False)
             top_articles = get_top15_articles(category.id)
             return render_template(
                 'index.html',
@@ -56,7 +56,7 @@ def index(category_code=None):
     ).order_by(
         Article.create_time.desc()
     )
-    pagination = articles.paginate(page, per_page=1, error_out=False)
+    pagination = articles.paginate(page, per_page=10, error_out=False)
     top_articles = get_top15_articles()
 
     return render_template(
