@@ -1,7 +1,7 @@
 {% macro pagination_widget(pagination, endpoint) %}
 <div class="page-nav">
     <a class="w-nav w-pre" href="{% if pagination.has_prev %}{{ url_for(endpoint,page = pagination.page - 1, **kwargs) }}
-    {% else %}#{% endif %}" style="float: left;">上一页
+    {% else %}#{% endif %}" >上一页
     </a>
     <a class="w-nav w-next" href="{% if pagination.has_next %}{{ url_for(endpoint,page = pagination.page + 1, **kwargs) }}{% else %}#{% endif %}" style="float: right;">下一页</a>
 </div>
