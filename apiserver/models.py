@@ -79,6 +79,7 @@ class Category(db.Model, CRUDMixin):
     site_code = db.Column(db.String(20), nullable=False)
     code = db.Column(db.String(20), nullable=False)
     name = db.Column(db.String(255), nullable=False)
+    index = db.Column(db.Integer, default=0)
 
     def to_json(self):
         return {
@@ -86,6 +87,7 @@ class Category(db.Model, CRUDMixin):
             'name': self.name,
             'code': self.code,
             'siteCode': self.site_code,
+            'index': self.index or 0,
         }
 
 

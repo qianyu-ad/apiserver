@@ -22,6 +22,9 @@ class CateroyApi(RestApi):
             'code', location='json', required=True, help="code 不能为空",
         )
         parser.add_argument(
+            'index', location='json', default=0,
+        )
+        parser.add_argument(
             'siteCode',
             location='json',
             required=True,

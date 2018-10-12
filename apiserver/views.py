@@ -23,7 +23,9 @@ def get_top15_articles(category_id=None):
 def get_site_categories():
     """ 获取网站分类"""
     site_code = request.host.split('.')[0]
-    categories = Category.query.filter_by(site_code=site_code)
+    categories = Category.query.filter_by(site_code=site_code).order_by(
+        Category.index.desc()
+    )
     return categories
 
 
