@@ -102,14 +102,14 @@ class Article(db.Model, CRUDMixin):
     id = db.Column(db.String(16), default=make_uuid, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     category_id = db.Column(db.String(16), nullable=False)
-    seo_id = db.Column(db.String(16))
     content = db.Column(mysql.MEDIUMTEXT, nullable=False)
     count = db.Column(db.Integer, default=0)
+    description = db.Column(db.Text, default='')
+    keywords = db.Column(db.Text, default='')
     status = db.Column(db.Integer, default=1)
     display_time = db.Column(db.String(30), default=random_date)
     create_time = db.Column(db.DateTime, default=datetime.now)
     update_time = db.Column(db.DateTime, default=datetime.now)
-
 
     def to_json(self, has_content=False):
         resp = {
@@ -117,7 +117,8 @@ class Article(db.Model, CRUDMixin):
             'title': self.title,
             'status': self.status,
             'categoryId': self.category_id,
-            'seoId': self.seo_id,
+            'keywords': self.keywords,
+            'description': self.description,
             'count': self.count,
             'displayTime': self.display_time,
         }
@@ -153,32 +154,6 @@ class Site(db.Model, CRUDMixin):
             'code': self.code,
         }
 
-
-class Seo(db.Model, CRUDMixin):
-
-    __table_args__ = {
-        'mysql_engine': 'InnoDB',
-        'mysql_charset': 'utf8',
-    }
-    id = db.Column(db.String(16), default=make_uuid, primary_key=True)
-    name = db.Column(db.String(100), nullable=False, unique=True)
-    keywords = db.Column(db.Text)
-    desc = db.Column(db.Text)
-    description = db.Column(db.Text)
-
-    def to_json(self, is_show=False):
-        resp = {
-            'id': self.id,
-            'name': self.name,
-            'desc': self.desc,
-        }
-        if is_show:
-            resp['keywords'] = self.keywords[:60]
-            resp['description'] = self.description[:60]
-        else:
-            resp['keywords'] = self.keywords
-            resp['description'] = self.description
-        return resp
 
 def authenticate(username, password):
     """ 验证"""

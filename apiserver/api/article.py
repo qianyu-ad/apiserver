@@ -89,7 +89,10 @@ class ArticleListApi(RestApi):
             dest="category_id"
         )
         parser.add_argument(
-            'seoId', location='json', dest='seo_id'
+            'keywords', location='json',
+        )
+        parser.add_argument(
+            'description', location='json',
         )
         parser.add_argument(
             'id', location="json",

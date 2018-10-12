@@ -4,7 +4,7 @@
 import os
 from flask_script import Server, Manager
 from apiserver.app import create_app
-from apiserver.models import db, User, Article, Category, Site, Seo
+from apiserver.models import db, User, Article, Category, Site
 from flask_migrate import Migrate, MigrateCommand
 
 # pylint: disable=all
