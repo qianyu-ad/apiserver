@@ -8,6 +8,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <title>首页</title>
+    <link rel="shortcut icon" href="//resource.zhekemy.com/img/farvirate.ico" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/calendar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -56,7 +57,7 @@
                             <a href="/article/{{ article.id }}">{{ article.title }}</a>
                         </div>
                         <div class="list-cont ellipsis">
-                            {{ article.content[:150] | safe | filter_tag }}
+                            {{ article.content | safe | filter_tag }}
                         </div>
                         <div class="list-info">
                             <span class="list-date">{{ article.display_time }}</span>
