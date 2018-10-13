@@ -15,8 +15,9 @@ def main():
             with open(filepath) as fd:
                 result = json.loads(fd.read())
                 article = Article(
-                    category_id=result['categoryId'],
-                    title=result['title'],
+                    # category_id=result['categoryId'],
+                    category_id='e95b4bb17db74a17',
+                    title=result['title'][:250],
                     content=result['content'],
                     keywords=result['keywords'],
                     description=result['seoDescription'],
