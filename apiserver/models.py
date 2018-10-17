@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
 
     __table_args__ = {
         'mysql_engine': 'InnoDB',
-        'mysql_charset': 'utf8',
+        'mysql_charset': 'utf8mb4',
     }
 
     id = db.Column(db.String(16), default=make_uuid, primary_key=True)
@@ -72,7 +72,7 @@ class Category(db.Model, CRUDMixin):
 
     __table_args__ = {
         'mysql_engine': 'InnoDB',
-        'mysql_charset': 'utf8',
+        'mysql_charset': 'utf8mb4',
     }
 
     id = db.Column(db.String(16), default=make_uuid, primary_key=True)
@@ -95,7 +95,7 @@ class Article(db.Model, CRUDMixin):
 
     __table_args__ = {
         'mysql_engine': 'InnoDB',
-        'mysql_charset': 'utf8',
+        'mysql_charset': 'utf8mb4',
     }
     """
     :field status 0: 删除, 1:发布, 2:下线
@@ -133,7 +133,7 @@ class Site(db.Model, CRUDMixin):
 
     __table_args__ = {
         'mysql_engine': 'InnoDB',
-        'mysql_charset': 'utf8',
+        'mysql_charset': 'utf8mb4',
     }
     """
     :field name: 网站名称
